@@ -1,55 +1,48 @@
 import React from 'react';
 
-export function TodoFilters({ currentFilter, onFilterChange, colorFilter, onColorFilterChange }) {
-  // Define the available filters and colors
+export function TodoFilters({currentFilter,onFilterChange,colorFilter,onColorFilterChange,}) {
+  
   const filters = ['all', 'active', 'completed'];
   const colors = ['green', 'blue', 'orange', 'purple', 'red'];
 
   return (
-    <div>
-      {/* Filter Buttons */}
-      <div>
-        <span>Filter: </span>
+    <div className="flex flex-wrap gap-4 pt-4 border-t">
+      <div className="space-x-2">
+        <span className="text-gray-700">Filter:</span>
         {filters.map((filter) => (
           <button
             key={filter}
-            onClick={() => onFilterChange(filter)} // Call the handler with the selected filter
-            style={{
-              padding: '5px 10px',
-              margin: '5px',
-              border: '1px solid gray',
-              borderRadius: '5px',
-              backgroundColor: currentFilter === filter ? 'blue' : 'lightgray',
-              color: currentFilter === filter ? 'white' : 'black',
-            }}
+            onClick={() => onFilterChange(filter)}
+            className={`px-3 py-1 rounded ${
+              currentFilter === filter
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
           >
-            {filter.charAt(0).toUpperCase() + filter.slice(1)} {/* Capitalize filter names */}
+            {filter.charAt(0).toUpperCase() + filter.slice(1)}
           </button>
         ))}
       </div>
 
-      {/* Color Filters */}
-      <div>
-        <span>Colors: </span>
+      <div className="flex items-center gap-2">
+        <span className="text-gray-700">Colors:</span>
         {colors.map((color) => (
-          <label key={color} style={{ marginRight: '10px' }}>
+          <label key={color} className="flex items-center gap-1">
             <input
               type="checkbox"
-              checked={colorFilter.includes(color)} // Check if the color is in the current filter
+              checked={colorFilter.has(color)}
               onChange={(e) => {
-                const newFilter = [...colorFilter]; // Create a copy of the current filter
+                const newFilter = new Set(colorFilter);
                 if (e.target.checked) {
-                  newFilter.push(color); // Add color if checked
+                  newFilter.add(color);
                 } else {
-                  const index = newFilter.indexOf(color); // Find the index of the color
-                  if (index > -1) {
-                    newFilter.splice(index, 1); // Remove color if unchecked
-                  }
+                  newFilter.delete(color);
                 }
-                onColorFilterChange(newFilter); // Update the filter
+                onColorFilterChange(newFilter);
               }}
+              className="rounded text-blue-500 focus:ring-blue-500"
             />
-            {color}
+            <span className="capitalize">{color}</span>
           </label>
         ))}
       </div>
