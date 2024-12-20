@@ -1,31 +1,42 @@
 import React, { useState } from 'react';
 
-
 export function TodoInput({ onAdd }) {
   const [text, setText] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (text.trim()) {
+    if (text !== '') { 
       onAdd(text);
-      setText('');
+      setText(''); 
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Add Task"
-        className="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        style={{
+          padding: '8px',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+          width: '70%',
+        }}
       />
       <button
         type="submit"
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center gap-2"
+        style={{
+          marginLeft: '8px',
+          padding: '8px 12px',
+          backgroundColor: '#007bff',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+        }}
       >
-
         Add Task
       </button>
     </form>
