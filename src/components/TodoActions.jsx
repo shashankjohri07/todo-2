@@ -1,27 +1,41 @@
 import React from 'react';
 
-export function TodoActions({remainingCount, onMarkAllCompleted,onClearCompleted,}) {
-
-
-  
+export function TodoActions({ remainingCount, onMarkAllCompleted, onClearCompleted }) {
   return (
-    <div className="flex flex-wrap gap-4 pt-4 border-t">
-      <div className="flex-1">
-        <p className="text-gray-600">
+    <div style={{ marginTop: '20px', borderTop: '1px solid #ddd', paddingTop: '10px' }}>
+      {/* Display the count of remaining items */}
+      <div>
+        <p style={{ color: '#555' }}>
           {remainingCount} {remainingCount === 1 ? 'item' : 'items'} left
         </p>
       </div>
 
-      <div className="space-x-2">
+      {/* Action Buttons */}
+      <div style={{ marginTop: '10px' }}>
         <button
           onClick={onMarkAllCompleted}
-          className="px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          style={{
+            padding: '8px 12px',
+            backgroundColor: '#007BFF',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            marginRight: '10px',
+            cursor: 'pointer',
+          }}
         >
           Mark All Completed
         </button>
         <button
           onClick={onClearCompleted}
-          className="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+          style={{
+            padding: '8px 12px',
+            backgroundColor: '#E0E0E0',
+            color: '#333',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }}
         >
           Clear Completed
         </button>
