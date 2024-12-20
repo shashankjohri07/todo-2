@@ -1,32 +1,49 @@
 import React from 'react';
-import { Check, X } from 'lucide-react';
 import { ColorSelect } from './ColorSelect';
 
 export function TodoItem({ todo, onToggle, onDelete, onColorChange }) {
   return (
-    <div className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm">
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px', background: '#fff', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)' }}>
+      {/* Toggle Completion */}
       <button
         onClick={() => onToggle(todo.id)}
-        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center
-          ${todo.completed ? 'bg-green-500 border-green-500' : 'border-gray-300'}`}
+        style={{
+          width: '24px',
+          height: '24px',
+          borderRadius: '50%',
+          border: '2px solid',
+          borderColor: todo.completed ? 'green' : 'gray',
+          backgroundColor: todo.completed ? 'green' : 'transparent',
+          color: 'white',
+          cursor: 'pointer',
+        }}
       >
-        {todo.completed && <Check size={16} className="text-white" />}
+        {todo.completed && '✔'}
       </button>
-      
-      <span className={`flex-1 ${todo.completed ? 'line-through text-gray-500' : ''}`}>
+
+      {/* Todo Text */}
+      <span style={{ flex: 1, textDecoration: todo.completed ? 'line-through' : 'none', color: todo.completed ? 'gray' : 'black' }}>
         {todo.text}
       </span>
 
+      {/* Color Selector */}
       <ColorSelect
         selectedColor={todo.color}
         onChange={(color) => onColorChange(todo.id, color)}
       />
 
+      {/* Delete Button */}
       <button
         onClick={() => onDelete(todo.id)}
-        className="text-gray-500 hover:text-red-500"
+        style={{
+          background: 'none',
+          border: 'none',
+          color: 'red',
+          fontSize: '16px',
+          cursor: 'pointer',
+        }}
       >
-        <X size={20} />
+        ✖
       </button>
     </div>
   );
